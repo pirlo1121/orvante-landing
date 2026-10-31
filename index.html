@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orvante — Branding Agency</title>
+<meta name="description" content="Orvante is a fictional branding agency: strategy-led identity, websites and performance marketing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&family=Archivo:wdth,wght@62..125,100..900&display=swap">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  /* 1 unit = 1px on a 1440px artboard, capped so the artboard never exceeds 1920px */
+  --u: min(calc(100vw / 1440), 1.333px);
+  --paper:#dadada;
+  --ink:#111;
+  --black:#000;
+  --text:#f4f4f4;
+  --grey:#6f6f6f;
+  --ui:"Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --disp:"Archivo", "Inter Tight", system-ui, sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+@media (max-width:760px){
+  :root{ --u: calc(100vw / 390); }
+}
+
+/* ---------- base ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#000;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:#000;color:var(--text);font-family:var(--ui);font-weight:500;overflow-x:hidden}
+img{display:block;max-width:none}
+a{color:inherit;text-decoration:none}
+button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
+ul{list-style:none}
+svg{display:block}
+
+/* absolute placement on the artboard; --x/--y are artboard units, --px/--py the phone overrides */
+.abs{position:absolute;left:calc(var(--x)*var(--u));top:calc(var(--y)*var(--u))}
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:calc(938*var(--u));background:var(--paper);color:var(--ink);overflow:hidden}
+.stage{position:absolute;top:0;left:50%;width:calc(1440*var(--u));height:100%;transform:translateX(-50%)}
+
+.photo{width:calc(764*var(--u));height:calc(1024*var(--u));overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);
+          mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
+.photo-img{position:absolute;left:0;top:-3%;width:100%;height:106%;object-fit:cover;object-position:50% 30%;will-change:transform}
+
+/* nav */
+.nav{position:absolute;display:flex;align-items:center;height:calc(48*var(--u));padding:calc(4*var(--u));border-radius:999px;background:#fff;z-index:5}
+.pill{position:absolute;left:0;top:calc(4*var(--u));height:calc(40*var(--u));width:0;border-radius:999px;background:var(--ink);transition:transform .5s var(--ease),width .5s var(--ease)}
+.nav a{position:relative;z-index:1;height:calc(40*var(--u));line-height:calc(40*var(--u));padding:0 calc(20*var(--u));font-size:calc(14*var(--u));font-weight:500;color:var(--ink);border-radius:999px;transition:color .3s}
+.nav a.on{color:#fff}
+
+/* title */
+.title{font-family:var(--disp);font-stretch:104%;font-weight:640;font-size:calc(90*var(--u));line-height:.86;letter-spacing:-.06em;white-space:nowrap;color:var(--ink)}
+.mask{display:block;overflow:hidden;padding:.12em 0;margin:-.12em 0}
+.mask > span{display:block}
+.yr{font-size:calc(16*var(--u));font-weight:500;letter-spacing:-.01em;color:var(--ink);white-space:nowrap}
+
+/* about */
+.label{font-size:calc(14*var(--u));font-weight:500;color:var(--ink);white-space:nowrap}
+.about-copy{width:calc(300*var(--u));font-size:calc(14*var(--u));line-height:1.4;color:var(--ink)}
+.date{font-size:calc(14*var(--u));font-weight:500;color:var(--ink);white-space:nowrap}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:calc(8*var(--u));height:calc(46*var(--u));padding:0 calc(22*var(--u));border-radius:999px;background:var(--ink);color:var(--text);font-size:calc(14*var(--u));font-weight:500;white-space:nowrap;transition:transform .3s var(--ease)}
+.btn:hover{transform:translateY(-1px)}
+.contact{width:calc(144*var(--u))}
+.btn-about{width:auto}
+
+/* stats frame */
+.stats{display:flex;gap:calc(8*var(--u));width:calc(341*var(--u));height:calc(208*var(--u));padding:calc(8*var(--u));border-radius:calc(8*var(--u));background:#cdcdcd;color:var(--ink)}
+.card-dark{position:relative;width:calc(200*var(--u));height:100%;padding:calc(14*var(--u));border-radius:calc(7*var(--u));background:#0b0b0b;color:var(--text);display:flex;flex-direction:column;justify-content:space-between}
+.card-dark .num{font-family:var(--disp);font-stretch:104%;font-size:calc(44*var(--u));font-weight:560;line-height:1;letter-spacing:-.03em}
+.card-dark .cap{font-size:calc(12*var(--u));color:rgba(244,244,244,.7);margin-top:calc(4*var(--u))}
+.marks{display:grid;grid-template-columns:repeat(3,1fr);gap:calc(8*var(--u)) calc(6*var(--u));font-size:calc(9.5*var(--u));color:rgba(244,244,244,.72)}
+.marks li{display:flex;align-items:center;gap:calc(5*var(--u));white-space:nowrap}
+.marks svg{width:calc(11*var(--u));height:calc(11*var(--u));fill:none;stroke:currentColor;stroke-width:1.4}
+.bookbar{display:flex;align-items:center;justify-content:center;height:calc(34*var(--u));border-radius:calc(6*var(--u));background:#fff;color:var(--ink);font-size:calc(12*var(--u));font-weight:500;transition:transform .3s var(--ease)}
+.bookbar:hover{transform:translateY(-1px)}
+.card-photo{position:relative;flex:1;height:100%;border-radius:calc(7*var(--u));overflow:hidden;color:var(--text)}
+.card-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7),rgba(0,0,0,0) 55%)}
+.card-photo .hair{position:absolute;top:0;left:0;right:0;height:1px;background:rgba(255,255,255,.55);z-index:2}
+.card-photo .feed{position:absolute;top:calc(10*var(--u));left:calc(10*var(--u));z-index:2;font-size:calc(10*var(--u));white-space:nowrap}
+.kpi{position:absolute;right:calc(10*var(--u));bottom:calc(10*var(--u));left:calc(10*var(--u));z-index:2;text-align:right}
+.kpi b{display:block;font-family:var(--disp);font-stretch:104%;font-size:calc(30*var(--u));font-weight:560;line-height:1;letter-spacing:-.02em}
+.kpi span{display:block;margin-top:calc(4*var(--u));font-size:calc(10*var(--u));line-height:1.3;color:rgba(244,244,244,.8)}
+
+/* growth pill */
+.growth{display:inline-flex;align-items:center;gap:calc(8*var(--u));padding:calc(6*var(--u)) calc(16*var(--u)) calc(6*var(--u)) calc(6*var(--u));border-radius:999px;background:rgba(255,255,255,.42);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.7);font-size:calc(14*var(--u));color:var(--ink);white-space:nowrap}
+.disc{display:grid;place-items:center;width:calc(28*var(--u));height:calc(28*var(--u));border-radius:50%;background:var(--ink)}
+.disc svg{width:calc(12*var(--u));height:calc(12*var(--u));fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+.avail{left:auto;right:calc(57*var(--u));text-align:right;font-size:calc(14*var(--u));line-height:1.4;color:var(--ink)}
+.avail .dot{color:var(--ink)}
+
+/* out now */
+.outnow{width:calc(167*var(--u));color:var(--text)}
+.q-card{display:block;position:relative;width:100%;height:calc(196*var(--u));border-radius:calc(8*var(--u));overflow:hidden;background:#222}
+.q-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 45%;transform:scale(1.55);transform-origin:62% 45%;transition:transform 1s var(--ease)}
+.q-card:hover .q-img{transform:scale(1.65)}
+.q-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),rgba(0,0,0,0) 50%);pointer-events:none}
+.q-top,.q-bot{position:absolute;left:calc(12*var(--u));right:calc(12*var(--u));z-index:2}
+.q-top{top:calc(12*var(--u));display:flex;justify-content:space-between;align-items:flex-start;font-size:calc(12*var(--u))}
+.q-bot{bottom:calc(22*var(--u))}
+.q-bot b{display:block;font-family:var(--disp);font-stretch:104%;font-size:calc(20*var(--u));font-weight:600;line-height:1.05;letter-spacing:-.02em}
+.q-bot span{font-size:calc(12*var(--u));color:rgba(244,244,244,.8)}
+.arrow-btn{display:grid;place-items:center;width:calc(36*var(--u));height:calc(36*var(--u));border-radius:50%;background:rgba(255,255,255,.22);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.45);transition:transform .5s var(--ease)}
+.arrow-btn svg{width:calc(14*var(--u));height:calc(14*var(--u));fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.q-card:hover .arrow-btn{transform:rotate(45deg)}
+.progress{position:absolute;left:calc(12*var(--u));right:calc(12*var(--u));bottom:calc(12*var(--u));z-index:2;height:calc(2*var(--u));background:rgba(255,255,255,.35)}
+.progress i{display:block;width:35%;height:100%;background:#fff;transform-origin:left center}
+
+/* brand plate, logos (positioned on the photo) */
+.plate{display:flex;align-items:center;gap:calc(18*var(--u));width:calc(364*var(--u));height:calc(73*var(--u));padding:0 calc(22*var(--u));border-radius:calc(12*var(--u));background:rgba(18,18,18,.42);-webkit-backdrop-filter:blur(14px) saturate(120%);backdrop-filter:blur(14px) saturate(120%);border:1px solid rgba(255,255,255,.22);color:var(--text)}
+.plate .mark{width:calc(40*var(--u));height:calc(40*var(--u));flex:none}
+.plate-name{font-family:var(--disp);font-stretch:125%;font-weight:700;font-size:calc(25*var(--u));letter-spacing:.06em;white-space:nowrap}
+.menu{margin-left:auto;display:flex;flex-direction:column;gap:calc(7*var(--u))}
+.menu i{display:block;width:calc(26*var(--u));height:2px;background:var(--text)}
+.logos{left:0;width:100%;display:flex;justify-content:center;align-items:center;gap:calc(16*var(--u));font-family:var(--disp);font-stretch:115%;font-weight:600;font-size:calc(20*var(--u));letter-spacing:-.01em;color:var(--text);white-space:nowrap;text-shadow:0 1px 14px rgba(0,0,0,.2)}
+.logos i{font-style:normal;opacity:.7}
+
+/* ---------- bar ---------- */
+.bar{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:calc(111*var(--u));padding:0 calc(57*var(--u));background:#000;border-bottom:1px solid rgba(255,255,255,.14);font-family:var(--disp);font-stretch:125%;font-weight:600;font-size:calc(14*var(--u));letter-spacing:.12em;text-transform:uppercase;color:var(--text)}
+.bar > :first-child{justify-self:start}
+.bar > :last-child{justify-self:end;color:var(--grey)}
+.bar .g{color:var(--grey)}
+.down{display:inline-flex;align-items:center;gap:calc(14*var(--u))}
+.ring{display:grid;place-items:center;width:calc(40*var(--u));height:calc(40*var(--u));border-radius:50%;background:#fff;color:#000;transition:transform .4s var(--ease)}
+.ring svg{width:calc(16*var(--u));height:calc(16*var(--u));fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.down:hover .ring{transform:translateY(3px)}
+
+/* ---------- statement ---------- */
+.statement{background:#000;padding:calc(170*var(--u)) calc(24*var(--u)) calc(230*var(--u));text-align:center}
+.statement-text{width:calc(830*var(--u));margin:0 auto;font-size:calc(52*var(--u));line-height:1.33;letter-spacing:-.028em;font-weight:500;color:var(--grey)}
+.sub{margin:calc(150*var(--u)) auto 0;width:calc(830*var(--u));font-size:calc(23*var(--u));line-height:1.35;letter-spacing:-.01em;color:var(--text)}
+.sub em{font-style:normal;color:var(--grey)}
+
+/* ---------- trust ---------- */
+.trust{background:#000;padding:0 0 calc(150*var(--u))}
+.panel{position:relative;width:calc(1302*var(--u));height:calc(429*var(--u));margin:0 auto;border:1px solid rgba(255,255,255,.28);border-radius:calc(14*var(--u));overflow:hidden}
+.t-head{position:absolute;left:calc(57*var(--u));top:calc(56*var(--u));font-size:calc(55*var(--u));line-height:.98;font-weight:500;letter-spacing:-.03em;color:var(--text)}
+.t-para{position:absolute;left:calc(57*var(--u));top:calc(304*var(--u));width:calc(370*var(--u));font-size:calc(14.5*var(--u));line-height:1.55;color:rgba(244,244,244,.72)}
+.tile{position:absolute;display:grid;place-items:center;width:calc(88*var(--u));height:calc(88*var(--u));border-radius:calc(12*var(--u));background:rgba(255,255,255,.12);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.26)}
+.tile svg{width:calc(34*var(--u));height:calc(34*var(--u));fill:none;stroke:var(--text);stroke-width:2.2;stroke-linecap:round}
+.tile-a{left:calc(340*var(--u));top:calc(30*var(--u))}
+.tile-b{left:calc(360*var(--u));top:calc(190*var(--u))}
+
+.cards{position:absolute;left:calc(480*var(--u));top:calc(52*var(--u));display:flex;gap:calc(16*var(--u))}
+.tcard{position:relative;height:calc(326*var(--u));border-radius:calc(8*var(--u));overflow:hidden;transition:transform .6s var(--ease)}
+.tcard:hover,.award.lift{transform:translateY(calc(-6*var(--u)))}
+.avatars-card{width:calc(293*var(--u));padding:calc(24*var(--u));background:#d6d6d6;color:var(--ink);display:flex;flex-direction:column;justify-content:space-between}
+.av-grid{display:grid;grid-template-columns:repeat(4,calc(48*var(--u)));justify-content:space-between;row-gap:calc(12*var(--u))}
+.av{width:calc(48*var(--u));height:calc(48*var(--u));border-radius:50%;object-fit:cover;opacity:0;transform:scale(.4);transition:transform .7s cubic-bezier(.2,.9,.3,1.25),opacity .4s;transition-delay:calc(var(--i)*70ms)}
+.panel.in .av{opacity:1;transform:none}
+.av-foot b,.aw-top b{display:block;font-family:var(--disp);font-stretch:104%;font-size:calc(43*var(--u));font-weight:560;line-height:1;letter-spacing:-.03em}
+.av-foot span{display:block;margin-top:calc(6*var(--u));font-size:calc(14*var(--u))}
+.award{width:calc(298*var(--u));padding:calc(24*var(--u));background:#262626;color:var(--text);display:flex;flex-direction:column;justify-content:space-between}
+.aw-top span{display:block;margin-top:calc(6*var(--u));font-size:calc(14*var(--u))}
+.laurel{width:calc(200*var(--u));height:auto;margin:0 auto}
+.aw-note{font-size:calc(12*var(--u));line-height:1.5;color:rgba(244,244,244,.7)}
+.portrait{width:calc(200*var(--u));margin-right:calc(-40*var(--u));background:#5c6670}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition-duration:0s!important;animation-duration:0s!important}
+}
+
+/* ---------- phone ---------- */
+@media (max-width:760px){
+  .abs{left:calc(var(--px,var(--x))*var(--u));top:calc(var(--py,var(--y))*var(--u))}
+  .stage{width:calc(390*var(--u))}
+  .hero{height:calc(1480*var(--u))}
+  .photo{width:calc(390*var(--u));height:calc(470*var(--u));-webkit-mask-image:none;mask-image:none}
+  .date,.avail{display:none}
+  .contact{width:calc(40*var(--u));height:calc(40*var(--u));padding:0}
+  .contact .lbl{display:none}
+  .contact .ar{font-size:calc(16*var(--u))}
+  .nav a{padding:0 calc(12*var(--u));font-size:calc(13*var(--u))}
+  .title{font-size:calc(90*var(--u))}
+  .btn-about{width:calc(150*var(--u))}
+  .stats{width:calc(358*var(--u))}
+  .card-dark,.card-photo{width:auto;flex:1}
+  .outnow{width:calc(358*var(--u))}
+  .q-card{height:calc(196*var(--u))}
+
+  .bar{padding:0 calc(16*var(--u));font-size:calc(10*var(--u));letter-spacing:.04em}
+  .bar > *{white-space:nowrap}
+  .statement{padding:calc(120*var(--u)) calc(16*var(--u)) calc(160*var(--u))}
+  .statement-text{width:100%;font-size:calc(28*var(--u))}
+  .br{display:none}
+  .sub{width:100%;font-size:calc(14*var(--u));margin-top:calc(80*var(--u))}
+
+  .panel{width:auto;height:auto;margin:0 calc(16*var(--u));padding:calc(44*var(--u)) calc(20*var(--u)) calc(24*var(--u));display:flex;flex-direction:column;gap:calc(24*var(--u))}
+  .t-head,.t-para{position:static;width:auto}
+  .t-head{font-size:calc(50*var(--u))}
+  .tile-a{position:absolute;left:auto;right:calc(16*var(--u));top:calc(40*var(--u))}
+  .tile-b{display:none}
+  .cards{position:static;flex-direction:column;gap:calc(16*var(--u))}
+  .avatars-card,.award{width:100%}
+  .portrait{width:100%;height:calc(200*var(--u));margin-right:0}
+  .portrait img{height:100%}
+  .trust{padding-bottom:calc(150*var(--u))}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="stage">
+
+    <div class="photo abs" style="--x:338;--y:-86;--px:0;--py:450">
+      <img class="photo-img" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/7dc8b8f3-4ccb-4599-8ce4-7f7c7881bad9.webp" alt="Black-and-white studio portrait of a man seen from behind, head turned slightly right, in a dark technical jacket">
+
+      <div class="plate abs" data-rise style="--x:194;--y:530;--px:13;--py:300">
+        <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M3 37 L20 3 L20 37 Z" fill="#f4f4f4"/>
+          <path d="M20 37 L37 3 L37 37 Z" fill="#8c8c8c"/>
+        </svg>
+        <span class="plate-name">ORVANTE</span>
+        <span class="menu" aria-hidden="true"><i></i><i></i></span>
+      </div>
+
+      <div class="logos abs" data-rise style="--x:0;--y:950;--px:0;--py:420">
+        <span>Lumon</span><i>·</i><span>Paperfold</span><i>·</i><span>Northwind</span>
+      </div>
+    </div>
+
+    <nav class="nav abs" aria-label="Primary" style="--x:57;--y:61;--px:16;--py:16">
+      <span class="pill" aria-hidden="true"></span>
+      <a href="#top" class="on" data-link>Home</a>
+      <a href="#statement" data-link>Studio</a>
+      <a href="#trust" data-link>Works</a>
+      <a href="#trust" data-link>Blog</a>
+    </nav>
+
+    <p class="date abs" data-rise style="--x:1038;--y:70">Sunday / 17.06 – 27 June 2026</p>
+
+    <a class="btn contact abs" data-rise href="#contact" style="--x:1237;--y:63;--px:334;--py:16">
+      <span class="lbl">Contact Us</span><span class="ar">↗</span>
+    </a>
+
+    <h1 class="title abs" style="--x:57;--y:246;--px:16;--py:110">
+      <span class="mask"><span>PURE</span></span>
+      <span class="mask"><span>DESIGN</span></span>
+    </h1>
+    <span class="yr abs" data-rise style="--x:339;--y:272;--px:300;--py:124">(’25)</span>
+
+    <p class="label abs" data-rise style="--x:57;--y:458;--px:16;--py:290">● (ABOUT)</p>
+    <p class="about-copy abs" data-rise style="--x:57;--y:486;--px:16;--py:316">Building stunning website that every brand deserves to be seen.</p>
+    <a class="btn btn-about abs" data-rise href="#contact" style="--x:57;--y:584;--px:16;--py:376">Book A Call ↗</a>
+
+    <div class="stats abs" data-rise style="--x:57;--y:693;--px:16;--py:1010">
+      <div class="card-dark">
+        <div>
+          <div class="num"><b class="count" data-to="400" data-suf="+">0+</b></div>
+          <div class="cap">Trusted Partner</div>
+        </div>
+        <ul class="marks">
+          <li><svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="4.5"/></svg>Halcyon</li>
+          <li><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5 10.5 10.5H1.5Z"/></svg>Ostra</li>
+          <li><svg viewBox="0 0 12 12" aria-hidden="true"><rect x="1.5" y="1.5" width="9" height="9"/></svg>Fenwick</li>
+          <li><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5 10.5 6 6 10.5 1.5 6Z"/></svg>Monolo</li>
+          <li><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5v9M1.5 6h9"/></svg>Kitefly</li>
+          <li><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 8.5a4.5 4.5 0 0 1 9 0Z"/></svg>Arbor</li>
+        </ul>
+        <a class="bookbar" href="#contact">Book a call ↗</a>
+      </div>
+      <div class="card-photo">
+        <img src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/a9d3641f-d629-46e5-8d2d-5f75386b803d.webp" alt="Young man in a black cap against a dark background" loading="eager">
+        <span class="hair" aria-hidden="true"></span>
+        <span class="feed">Studio Feed · 05/06</span>
+        <div class="kpi">
+          <b class="count" data-to="230" data-suf="+">0+</b>
+          <span>Projects successfully launched worldwide</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="growth abs" data-rise style="--x:1216;--y:258;--px:16;--py:950">
+      <span class="disc"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.5 3.6"/></svg></span>True Growth
+    </div>
+
+    <p class="avail abs" data-rise style="--y:442;--px:0;--py:0">We’re available<br><span class="dot">●</span> for you</p>
+
+    <div class="outnow abs" data-rise style="--x:1216;--y:500;--px:16;--py:1250">
+      <a class="q-card" href="#works" aria-label="Q Industrial, 2025">
+        <img class="q-img" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/9340eb08-877d-4d08-91fb-b70754541d98.webp" alt="Abstract motion-blurred monochrome fashion shot with a sharp white angular shape">
+        <div class="q-top">
+          <span>Out Now</span>
+          <span class="arrow-btn" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M3 11 11 3M5 3h6v6"/></svg></span>
+        </div>
+        <div class="q-bot">
+          <b>Q Industrial</b>
+          <span>[2025]</span>
+        </div>
+        <span class="progress" aria-hidden="true"><i></i></span>
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<!-- ================= BAR ================= -->
+<div class="bar" role="presentation">
+  <span>EST <span class="g">2019</span></span>
+  <a class="down" href="#statement" aria-label="Scroll down">SCROLL DOWN <span class="ring"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4"/></svg></span></a>
+  <span>LIVE IN DETAILS</span>
+</div>
+
+<!-- ================= STATEMENT ================= -->
+<section class="statement" id="statement">
+  <p class="statement-text">
+    <span class="w">We</span> <span class="w">believe</span> <span class="w">the</span> <span class="w">strongest</span> <span class="w">brands</span> <span class="w">are</span><br class="br">
+    <span class="w">built</span> <span class="w">through</span> <span class="w">strategy,</span> <span class="w">not</span> <span class="w">just</span><br class="br">
+    <span class="w">aesthetics.</span> <span class="w">Every</span> <span class="w">campaign</span> <span class="w">is</span> <span class="w">designed</span><br class="br">
+    <span class="w">to</span> <span class="w">capture</span> <span class="w">attention,</span> <span class="w">inspire</span> <span class="w">action,</span> <span class="w">and</span><br class="br">
+    <span class="w">create</span> <span class="w">lasting</span> <span class="w">business</span> <span class="w">growth.</span>
+  </p>
+  <p class="sub">Performance-driven marketing, from<br class="br"> strategy to execution. <em>Built for growing brands.</em></p>
+</section>
+
+<!-- ================= TRUST ================= -->
+<section class="trust" id="trust">
+  <div class="panel">
+    <h2 class="t-head">Trusted by<br>Hundreds of<br>Growing<br>Businesses</h2>
+    <p class="t-para">Orvante partners with ambitious founders and studios to build identities, websites and campaigns that earn attention and keep it. Strategy first, craft always.</p>
+
+    <span class="tile tile-a" aria-hidden="true">
+      <svg viewBox="0 0 34 34"><path d="M17 4v26M6.5 10.5l21 13M27.5 10.5l-21 13"/></svg>
+    </span>
+    <span class="tile tile-b" aria-hidden="true">
+      <svg viewBox="0 0 34 34"><circle cx="12" cy="12" r="2.2" fill="currentColor"/><circle cx="22" cy="12" r="2.2" fill="currentColor"/><circle cx="12" cy="22" r="2.2" fill="currentColor"/><circle cx="22" cy="22" r="2.2" fill="currentColor"/></svg>
+    </span>
+
+    <div class="cards">
+      <article class="tcard avatars-card">
+        <div class="av-grid">
+          <img class="av" style="--i:0" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/300f41b1-3de5-4153-afde-06e15e753ad0.webp" alt="" width="240" height="240" loading="lazy">
+          <img class="av" style="--i:1" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/bfff4cdf-4fda-4491-ada6-62f3b6236492.webp" alt="" width="240" height="240" loading="lazy">
+          <img class="av" style="--i:2" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/943b121e-fe72-479f-93ae-aa8cd1650f69.webp" alt="" width="240" height="240" loading="lazy">
+          <img class="av" style="--i:3" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/c673306f-2b81-4c3d-a7d2-3df61d481abb.webp" alt="" width="240" height="240" loading="lazy">
+          <img class="av" style="--i:4" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/2e4fcf11-d0fc-4f31-8f7a-dfe751777141.webp" alt="" width="240" height="240" loading="lazy">
+          <img class="av" style="--i:5" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/ab458fcd-4c2c-426f-8213-21cc3c7274be.webp" alt="" width="240" height="240" loading="lazy">
+          <img class="av" style="--i:6" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/c1fcd833-5ac9-41e9-9352-fead7e64fa24.webp" alt="" width="240" height="240" loading="lazy">
+          <img class="av" style="--i:7" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/4c2b3307-e555-4633-949c-efd3b7e09d82.webp" alt="" width="240" height="240" loading="lazy">
+        </div>
+        <div class="av-foot">
+          <b class="count" data-to="56" data-suf="M+">0M+</b>
+          <span>Global Collaborations</span>
+        </div>
+      </article>
+
+      <article class="tcard award">
+        <div class="aw-top">
+          <b class="count" data-to="10" data-suf="+">0+</b>
+          <span>Industry Awards</span>
+        </div>
+        <svg class="laurel" viewBox="0 0 260 120" role="img" aria-label="Best Growth Partner 2026 badge">
+          <g fill="#d6d6d6">
+            <ellipse cx="58" cy="92" rx="8" ry="3.5" transform="rotate(-35 58 92)"/>
+            <ellipse cx="40" cy="78" rx="8" ry="3.5" transform="rotate(-60 40 78)"/>
+            <ellipse cx="30" cy="60" rx="8" ry="3.5" transform="rotate(-90 30 60)"/>
+            <ellipse cx="36" cy="40" rx="8" ry="3.5" transform="rotate(-120 36 40)"/>
+            <ellipse cx="54" cy="26" rx="8" ry="3.5" transform="rotate(-145 54 26)"/>
+            <ellipse cx="78" cy="16" rx="8" ry="3.5" transform="rotate(-165 78 16)"/>
+          </g>
+          <g fill="#d6d6d6" transform="translate(260 0) scale(-1 1)">
+            <ellipse cx="58" cy="92" rx="8" ry="3.5" transform="rotate(-35 58 92)"/>
+            <ellipse cx="40" cy="78" rx="8" ry="3.5" transform="rotate(-60 40 78)"/>
+            <ellipse cx="30" cy="60" rx="8" ry="3.5" transform="rotate(-90 30 60)"/>
+            <ellipse cx="36" cy="40" rx="8" ry="3.5" transform="rotate(-120 36 40)"/>
+            <ellipse cx="54" cy="26" rx="8" ry="3.5" transform="rotate(-145 54 26)"/>
+            <ellipse cx="78" cy="16" rx="8" ry="3.5" transform="rotate(-165 78 16)"/>
+          </g>
+          <circle cx="130" cy="58" r="44" fill="none" stroke="#d6d6d6" stroke-opacity=".5"/>
+          <text x="130" y="54" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="700" font-size="8.5" letter-spacing="1.2" fill="#f4f4f4">BEST GROWTH</text>
+          <text x="130" y="67" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="700" font-size="8.5" letter-spacing="1.2" fill="#f4f4f4">PARTNER 2026</text>
+        </svg>
+        <p class="aw-note">Recognised for measurable growth and craft across every engagement we take on.</p>
+      </article>
+
+      <article class="tcard portrait">
+        <img src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/addecc7d-666f-4342-8290-ed7f7cbbffd6.webp" alt="Side profile of a man in a white t-shirt against a blue-grey gradient" loading="lazy">
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const rec = new URLSearchParams(location.search).get('rec') === '1';
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  const t0 = performance.now();                       // page start, used by ?rec=1 timings
+  const elapsed = () => (performance.now() - t0) / 1000;
+
+  // fill:'backwards' so a finished animation hands control back to CSS (keeps hover transforms working)
+  const anim = (el, frames, opts) =>
+    el.animate(frames, Object.assign({ fill: 'backwards', easing: 'cubic-bezier(.2,.7,.2,1)' }, opts));
+
+  // generic tween; startAt is a performance.now() timestamp
+  function tween(from, to, dur, startAt, set) {
+    set(from);
+    const step = t => {
+      const p = clamp((t - startAt) / dur);
+      set(from + (to - from) * easeOut(p));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- counters ---------- */
+  const setCount = (el, v) => { el.textContent = Math.round(v) + el.dataset.suf; };
+  const toFinal = el => { el.textContent = el.dataset.to + el.dataset.suf; };
+
+  /* ---------- load choreography ---------- */
+  if (!reduce) {
+    $$('.mask > span').forEach((s, i) =>
+      anim(s, [{ transform: 'translateY(105%)' }, { transform: 'none' }], { duration: 1000, delay: i * 110 }));
+
+    anim($('.photo'),
+      [{ transform: 'translateY(40px)', filter: 'blur(14px)', opacity: 0 },
+       { transform: 'none', filter: 'blur(0px)', opacity: 1 }],
+      { duration: 1300, easing: 'ease-out' });
+
+    anim($('.nav'),
+      [{ transform: 'translateY(-18px)', opacity: 0 }, { transform: 'none', opacity: 1 }],
+      { duration: 900, delay: 80 });
+
+    $$('[data-rise]').forEach((el, i) =>
+      anim(el, [{ transform: 'translateY(14px)', opacity: 0 }, { transform: 'none', opacity: 1 }],
+        { duration: 900, delay: 300 + i * 55 }));
+
+    anim($('.progress i'), [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
+      { duration: 1400, delay: 800, easing: 'ease-out' });
+  }
+
+  // hero counters
+  $$('.hero .count').forEach(el =>
+    reduce ? toFinal(el)
+           : tween(0, +el.dataset.to, 1400, performance.now() + 300, v => setCount(el, v)));
+
+  /* ---------- trust reveal ---------- */
+  const panel = $('.panel');
+  const award = $('.award');
+  let revealed = false;
+  function reveal() {
+    if (revealed) return;
+    revealed = true;
+    panel.classList.add('in');
+    $$('.panel .count').forEach(el =>
+      reduce ? toFinal(el)
+             : tween(0, +el.dataset.to, 1700, rec ? t0 + 3500 : performance.now() + 150, v => setCount(el, v)));
+  }
+  if (reduce) reveal();
+  else if (rec) setTimeout(reveal, 3500);
+  else new IntersectionObserver((es, io) => {
+    if (es[0].isIntersecting) { reveal(); io.disconnect(); }
+  }, { threshold: 0.3 }).observe(panel);
+
+  if (rec) setTimeout(() => award.classList.add('lift'), 5300);
+
+  /* ---------- statement fill + photo drift ---------- */
+  const words = $$('.statement-text .w');
+  const N = words.length;
+  const stmt = $('.statement-text');
+  const photo = $('.photo');
+  const photoImg = $('.photo-img');
+
+  function paintWords(p) {
+    const P = p * (N + 3);                             // 3-word soft edge
+    for (let i = 0; i < N; i++) {
+      const f = clamp((P - i) / 3);
+      const c = Math.round(111 + (244 - 111) * f);     // #6f6f6f → #f4f4f4
+      words[i].style.color = `rgb(${c},${c},${c})`;
+    }
+  }
+
+  function scrollState() {
+    let sp;
+    if (reduce) sp = 1;
+    else if (rec) sp = clamp((elapsed() - 1.3) / (4.2 - 1.3));
+    else {
+      const r = stmt.getBoundingClientRect();
+      sp = clamp((innerHeight * 0.85 - r.top) / (innerHeight * 0.6));
+    }
+    paintWords(sp);
+
+    if (!reduce) {
+      const max = photo.offsetHeight * 0.03;           // stay inside the image overscan
+      const d = rec ? Math.min(elapsed() * 0.9, max)
+                    : Math.min(scrollY * 0.12, max);   // 0.12× scroll parallax
+      photoImg.style.transform = `translate3d(0,${d}px,0)`;
+    }
+  }
+
+  if (rec) {
+    const loop = () => { scrollState(); requestAnimationFrame(loop); };
+    loop();
+  } else {
+    let queued = false;
+    const queue = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; scrollState(); });
+    };
+    addEventListener('scroll', queue, { passive: true });
+    addEventListener('resize', queue);
+    scrollState();
+  }
+
+  /* ---------- nav pill ---------- */
+  const nav = $('.nav');
+  const pill = $('.pill');
+  const links = $$('[data-link]');
+  let active = links[0];
+  function moveTo(a) {
+    links.forEach(l => l.classList.toggle('on', l === a));
+    pill.style.width = a.offsetWidth + 'px';
+    pill.style.transform = `translateX(${a.offsetLeft}px)`;
+  }
+  links.forEach(a => {
+    a.addEventListener('mouseenter', () => moveTo(a));
+    a.addEventListener('focus', () => moveTo(a));
+    a.addEventListener('click', e => { e.preventDefault(); active = a; moveTo(a); });
+  });
+  nav.addEventListener('mouseleave', () => moveTo(active));
+  document.fonts.ready.then(() => moveTo(active));
+  addEventListener('resize', () => moveTo(active));
+})();
+</script>
+</body>
+</html>
